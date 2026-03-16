@@ -3,16 +3,15 @@ package com.developer.VitalMed.domain.model;
 import com.developer.VitalMed.domain.enums.Especialidade;
 import com.developer.VitalMed.endereco.Endereco;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 @Table(name = "medicos")
 @Entity(name = "Medico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Setter
 public class MedicoModel {
 
        @Id

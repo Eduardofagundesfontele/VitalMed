@@ -1,11 +1,16 @@
 package com.developer.VitalMed.domain.model;
 
 import com.developer.VitalMed.endereco.Endereco;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Table(name = "paciente")
+@Entity(name = "paciente")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Setter
 public class PacienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
