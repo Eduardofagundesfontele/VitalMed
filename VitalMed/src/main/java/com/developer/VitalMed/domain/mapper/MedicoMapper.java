@@ -24,7 +24,7 @@ public interface MedicoMapper {
     //Dto para listagem
     MedicoListResponseDTO toListDto(MedicoModel medico);
 
-    // Atualiza a entidade Paciente a partir de PacienteUpdateRequest
+   //Se algum campo vier NULL, NÃO atualize esse campo
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 
     void updateEntityFromDto(MedicoUpdateDTO dto, @MappingTarget MedicoModel medico);

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     private String email;
     private String password;
     private String role;
