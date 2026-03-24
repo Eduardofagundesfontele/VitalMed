@@ -8,6 +8,7 @@ import com.developer.VitalMed.domain.mapper.PacienteMapper;
 import com.developer.VitalMed.domain.model.MedicoModel;
 import com.developer.VitalMed.domain.model.PacienteModel;
 import com.developer.VitalMed.domain.repository.PacienteRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,9 @@ public class PacienteService {
     public PacienteResponseDTO cadastrarPaciente(PacienteRequestDTO dto){
         PacienteModel paciente = mapper.toEntity(dto);
 
+        System.out.println(paciente.getCpf());
+        System.out.println(paciente.getEndereco());
+
         repository.save(paciente);
 
         return mapper.toResponseDTO(paciente);
@@ -34,17 +38,23 @@ public class PacienteService {
     }
 
     public PacienteResponseDTO buscarPacientePorId(Long id){
-        PacienteModel paciente = repository.getReferenceById(id);
+        PacienteModel paciente = repository.findById(id)
+                .orElseThrow(()->new jakarta.persistence.EntityNotFoundException());
+
         return mapper.toResponseDTO(paciente);
 
     }
+    @Transactional
     public PacienteResponseDTO atualizarPaciente(Long id,PacienteUpdateDTO dto){
-        PacienteModel paciente = repository.getReferenceById(id);
+        PacienteModel paciente = repository.findById(id)
+                        .orElseThrow(()-> new jakarta.persistence.EntityNotFoundException());
         mapper.updateEntityFromDto(dto,paciente);
         return mapper.toResponseDTO(paciente);
     }
+    @Transactional
     public void excluirPaciente(Long id ){
-        PacienteModel paciente = repository.getReferenceById(id);
+        PacienteModel paciente = repository.findById(id)
+                        .orElseThrow(()-> new jakarta.persistence.EntityNotFoundException());
         paciente.setAtivo(false);
 
         

@@ -1,0 +1,20 @@
+CREATE TABLE medicos (
+
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ nome VARCHAR(100) NOT NULL,
+ email VARCHAR(100) NOT NULL,
+ telefone VARCHAR(20) NOT NULL,
+ crm VARCHAR(20) NOT NULL,
+ especialidade VARCHAR(50) NOT NULL,
+
+ logradouro VARCHAR(100),
+ bairro VARCHAR(100),
+ cep VARCHAR(20),
+ cidade VARCHAR(100),
+ uf VARCHAR(10),
+ numero VARCHAR(20),
+ complemento VARCHAR(100),
+
+ ativo BOOLEAN
+
+);

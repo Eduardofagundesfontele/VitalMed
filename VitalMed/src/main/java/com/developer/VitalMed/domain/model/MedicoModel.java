@@ -30,6 +30,6 @@ public class MedicoModel {
         @Embedded
         private Endereco endereco;
 
-        private Boolean ativo;
+        private Boolean ativo = true;
 
     }

@@ -7,6 +7,7 @@ import com.developer.VitalMed.domain.dto.medico.response.MedicoResponseDTO;
 import com.developer.VitalMed.domain.mapper.MedicoMapper;
 import com.developer.VitalMed.domain.model.MedicoModel;
 import com.developer.VitalMed.domain.repository.MedicoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,18 +35,21 @@ public Page<MedicoListResponseDTO> listarMedicos(Pageable pageable){
 
 public MedicoResponseDTO buscarMedicoPorId(Long id){
 
-    MedicoModel medico = repository.getReferenceById(id);
+    MedicoModel medico = repository.findById(id)
+            .orElseThrow(()->new jakarta.persistence.EntityNotFoundException());
     return mapper.toResponseDTO(medico);
 }
-
+    @Transactional
 public MedicoResponseDTO atualizarMedico(Long id ,MedicoUpdateDTO dto){
-    MedicoModel medico = repository.getReferenceById(id);
+    MedicoModel medico = repository.findById(id)
+                    .orElseThrow(()->new jakarta.persistence.EntityNotFoundException());
     mapper.updateEntityFromDto(dto,medico);
     return mapper.toResponseDTO(medico);
 }
-
+@Transactional
 public void excluirMedico(Long id){
-    MedicoModel medico = repository.getReferenceById(id);
+    MedicoModel medico = repository.findById(id)
+                    .orElseThrow(()->new jakarta.persistence.EntityNotFoundException());
 
     medico.setAtivo(false);
 }

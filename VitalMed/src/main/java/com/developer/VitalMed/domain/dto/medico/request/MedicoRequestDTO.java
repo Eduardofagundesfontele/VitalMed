@@ -8,19 +8,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record MedicoRequestDTO(@NotBlank
-                               String nome,
-                               @NotBlank
-                               @Email
+public record MedicoRequestDTO(@NotBlank(message = "Email é obrigatório")
+                               @Email(message = "Email inválido")
                                String email,
-
-                               @NotBlank
+                               @NotBlank(message = "Telefone é obrigatório")
                                String telefone,
-                               @NotBlank
-                               @Pattern(regexp = "\\d{4,6}")
+                               @NotBlank(message = "CRM é obrigatório")
+                               @Pattern(regexp = "\\d{4,6}", message = "CRM deve ter entre 4 e 6 números")
                                String crm,
-                               @NotNull
+                               @NotNull(message = "Especialidade é obrigatória")
                                Especialidade especialidade,
-
-                               @NotNull @Valid DadosEndereco endereco) {
+                               @NotNull(message = "Endereço é obrigatório")
+                               @Valid
+                               DadosEndereco endereco) {
 }
